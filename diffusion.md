@@ -2,9 +2,11 @@
 
 ## Itô Diffusion
 A Itô diffusion is a stochastic differential equation (SDE) of the form
+
 $$ dX_t = b(X_t)dt + \sigma(X_t) dB_t. $$
 
 The Langevin SDE is
+
 $$ dx_t = -\nabla f(x_t)dt + \sqrt{2}dB_t. $$
 
 ## Training Objective
@@ -20,3 +22,12 @@ $$ \min_{s_t \in \mathcal{F}}~\mathbb{E}\left[\left\lVert s_t(\bar{X}_t) + \frac
 where $Z_t \sim N(0, I_d)$.
 
 For video generation, we can just see $\mathcal{F}$ as a distribution over the videos.
+
+## Denoising Diffusion Probabilistic Models
+Denoising Diffusion Probabilistic Models (DDPM) [[HJA20]][1]
+
+## Diffusion Transformers
+Diffusion Transformers (DiTs) [[PX22]][2]
+
+[1]: <https://arxiv.org/abs/2006.11239> "[HJA20] Denoising Diffusion Probabilistic Models"
+[2]: <https://arxiv.org/abs/2212.09748> "[PX22] Scalable Diffusion Models with Transformers"
