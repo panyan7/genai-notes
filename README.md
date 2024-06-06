@@ -1,1 +1,2 @@
-# genai-notes
+# Generative AI Reading Notes
+
