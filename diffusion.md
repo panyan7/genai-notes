@@ -1,4 +1,4 @@
-# Diffusion Model
+# Diffusion Models
 
 ## Itô Diffusion
 A Itô diffusion is a stochastic differential equation (SDE) of the form
