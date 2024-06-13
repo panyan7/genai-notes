@@ -30,11 +30,18 @@ where the function $\nabla_x \log p(x)$ is called the *score function*. We can t
 
 where we use integration by parts for the last equality. So we can parametrize the score function , and the training objective becomes
 
-$$ \frac{1}{N} \sum_{i=1}^n \lVert s_\theta(x_i)\rVert^2 + 2\mathrm{tr}(D_\theta s_\theta(x_i))$$
+$$ \frac{1}{N} \sum_{i=1}^n \lVert s_\theta(x_i)\rVert^2 + 2\mathrm{tr}(\nabla_x s_\theta(x_i))$$
 
-which is the score matching objective.
+which is the score matching objective [[SE19]][1].
 
-## Langevin Dynamics
+### Sliced Score Matching
+**Sliced score matching** [[SGSE19]][2] uses random projections to approximate $\mathrm{tr}(\nabla_x s_\theta(x))$ by 
+
+$$\mathbb{E}_{p_v} \mathbb{E}_p\left[v^\top \nabla_x s_\theta(x)v + \frac{1}{2} \lVert s_\theta(x)\rVert^2\right] $$
+
+where $p_v$ is a simple distribution of random vectors, such as $N(0, I)$.
+
+### Langevin Dynamics
 **Langevin Dynamics** provides a MCMC procedure to sample from a distribution using only its score function. It first samples $X_0 \sim \pi(x)$ from a prior distribution, then iterates the following
 
 $$X_{i+1} \gets X_i + \varepsilon \nabla_x \log p(X) + \sqrt{2\varepsilon} Z_i$$
@@ -42,3 +49,6 @@ $$X_{i+1} \gets X_i + \varepsilon \nabla_x \log p(X) + \sqrt{2\varepsilon} Z_i$$
 where $Z_i \sim N(0, I_d)$. When $\varepsilon \to 0$ and $N \to \infty$, $x_N$ converges to a sample drawn from $p(x)$ under regularity conditions.
 
 ## 
+
+[1]: <https://proceedings.neurips.cc/paper_files/paper/2019/hash/3001ef257407d5a371a96dcd947c7d93-Abstract.html> "[SE19] Generative Modeling by Estimating Gradients of the Data Distribution"
+[2]: <https://arxiv.org/abs/1905.07088> "[SGSE19] Sliced Score Matching: A Scalable Approach to Density and Score Estimation"
