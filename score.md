@@ -15,10 +15,10 @@ $$s_\theta(x) := \nabla_x \log p_\theta(x)$$
 instead, which is independent of the partition function $Z_\theta$ as $\nabla_x Z_\theta = 0$.  To train the model, we can minimize the **Fisher divergence** between the model and data distribution, defined as
 
 ```math
-\min_\theta \mathbb{E}_p\lVert \nabla_x \log p_\theta(x) - \nabla_x \log p(x)\rVert^2
+\min_\theta \mathbb{E}_p\lVert \nabla_x \log p_\theta(x) - \nabla_x \log p(x)\rVert^2.
 ```
 
-where the function $\nabla_x \log p(x)$ is called the *score function*. We can then rewrite the loss slightly
+We can then rewrite the loss slightly
 
 ```math
 \begin{align*}
@@ -34,10 +34,14 @@ $$ \frac{1}{N} \sum_{i=1}^n \lVert s_\theta(x_i)\rVert^2 + 2\mathrm{tr}(\nabla_x
 
 which is the score matching objective [[SE19]][1].
 
+The score matching objective of the Gaussian distribution is equivalent to just the traditional MLE objective.
+
 ### Sliced Score Matching
 **Sliced score matching** [[SGSE19]][2] uses random projections to approximate $\mathrm{tr}(\nabla_x s_\theta(x))$ by 
 
-$$\mathbb{E}_{p_v} \mathbb{E}_p\left[v^\top \nabla_x s_\theta(x)v + \frac{1}{2} \lVert s_\theta(x)\rVert^2\right] $$
+```math
+\mathbb{E}_{p_v} \mathbb{E}_p\left[v^\top \nabla_x s_\theta(x)v + \frac{1}{2} \lVert s_\theta(x)\rVert^2\right]
+```
 
 where $p_v$ is a simple distribution of random vectors, such as $N(0, I)$.
 
