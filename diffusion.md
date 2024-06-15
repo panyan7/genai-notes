@@ -2,21 +2,26 @@
 
 ## Background on Itô Diffusion
 Let $W_t$ denote the standard Werner process. A **Itô diffusion** is a stochastic differential equation (SDE) of the form
+
 $$ dX_t = b(X_t)dt + \sigma(X_t) dW_t. $$
 
 The **Langevin SDE** is
+
 $$ dx_t = -\nabla f(x_t)dt + \sqrt{2}dW_t. $$
 
 ## Diffusion Models
 
 ### DDPM
 [[HJA20]][1] considers a sequence of positive noise scales $\beta_1, \dots, \beta_N \in (0,1)$, and for each $x_0 \sim q(x)$, a discrete Markov chain is constructed such that
+
 $$ q(x_i|x_{i-1}) = \mathcal{N}(x_i; \sqrt{1-\beta_i} x_{i-1}, \beta_i I). $$
 
 This is called the **forward process** or **diffusion process**, where Gaussian noise is added to the data according to the variance schedule $\beta_1, \dots, \beta_N$. Let $\alpha_t := 1-\beta_t$ and $\bar{\alpha}_t = \prod_{s=1}^t \alpha_s$, the distribution of $x_t$ conditional on $x_0$ is
+
 $$ q(x_t|x_0) = \mathcal{N}(x_t; \sqrt{\bar{\alpha}_t}x_0, (1-\bar{\alpha}_t)I).$$
 
 The joint distribution $p_\theta(x_{0:T})$ is called the **reverse process** and is defined as a Markov chain with learned Gaussian transitions such that
+
 $$ p_\theta (x_{t-1}|x_t) = \mathcal{N}(x_{t-1}; \mu_\theta(x_t, t), \Sigma_\theta(x_t, t)). $$
 
 The fact that the reverse process is also a diffusion process is important, because learning the mean and covariance is much easier than learning the full distribution, and can be modeled as a regression problem. For example, when the target distribution are images, then the regression problem is actually the image denoising objective, which can be solved using many methods such as CNNs.
