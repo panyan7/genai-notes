@@ -46,13 +46,14 @@ The score matching objective of the Gaussian distribution is equivalent to just 
 where $p_v$ is a simple distribution of random vectors, such as $N(0, I)$.
 
 ### Langevin Dynamics
-**Langevin Dynamics** provides a MCMC procedure to sample from a distribution using only its score function. It first samples $X_0 \sim \pi(x)$ from a prior distribution, then iterates the following
+**Langevin Dynamics** provides a MCMC procedure to sample from a distribution using only its score function. It first samples $x_0 \sim \pi(x)$ from a prior distribution, then iterates the following
 
-$$X_{i+1} \gets X_i + \varepsilon \nabla_x \log p(X) + \sqrt{2\varepsilon} Z_i$$
+$$x_{i+1} \gets x_i + \varepsilon \nabla_x \log p(x) + \sqrt{2\varepsilon} z_i$$
 
-where $Z_i \sim N(0, I_d)$. When $\varepsilon \to 0$ and $N \to \infty$, $x_N$ converges to a sample drawn from $p(x)$ under regularity conditions.
+where $z_i \sim N(0, I_d)$. When $\varepsilon \to 0$ and $N \to \infty$, $x_N$ converges to a sample drawn from $p(x)$ under regularity conditions.
 
-## 
+### Noise Conditioned Score Networks (NCSN)
+[[SE19]][1] proposed the NCSN model for learning the score matching objective.
 
 [1]: <https://proceedings.neurips.cc/paper_files/paper/2019/hash/3001ef257407d5a371a96dcd947c7d93-Abstract.html> "[SE19] Generative Modeling by Estimating Gradients of the Data Distribution"
 [2]: <https://arxiv.org/abs/1905.07088> "[SGSE19] Sliced Score Matching: A Scalable Approach to Density and Score Estimation"
